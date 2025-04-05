@@ -9,9 +9,15 @@ import { StatusCard } from "@/components/StatusCard";
 import { useAppDispatch, useAppSelector } from "@/hooks/index";
 import { setAssignedTicket } from "@/store/slices/assignedTicketSlice";
 import { Toggle } from "./Toggle";
-import { setReportedTicket } from "@/store/slices/reportedTicketSlice";
+import {
+  addReportedTicket,
+  setReportedTicket,
+} from "@/store/slices/reportedTicketSlice";
 import { useNavigate } from "react-router-dom";
-import { setAdminTicket } from "@/store/slices/adminTicketSlice";
+import {
+  addAdminTicket,
+  setAdminTicket,
+} from "@/store/slices/adminTicketSlice";
 import { setOrgMember } from "@/store/slices/orgMemberSlice";
 import { IUserOrgMember } from "@/interfaces/user";
 import { TicketsTable } from "./TicketsTable";
@@ -19,6 +25,14 @@ import { SyncLoader } from "react-spinners";
 import { Building2, FilePlus } from "lucide-react";
 import { Button } from "./ui/button";
 import { ticketContext } from "@/context/TicketContext";
+import { connectSocket } from "@/utils/socket";
+import { addAssignedTicket } from "@/store/slices/assignedTicketSlice";
+import {
+  IAdminTicket,
+  IAssignedTicket,
+  IReporterTicket,
+} from "@/interfaces/socket";
+import { toast } from "sonner";
 
 export function TicketsCard() {
   const { activeOrgId, activeOrgRole } = useAppSelector(
@@ -34,6 +48,7 @@ export function TicketsCard() {
   const reportedTicket = useAppSelector((state) => state.reportedTicket);
   const adminTicket = useAppSelector((state) => state.adminTicket);
   const orgData = useAppSelector((state) => state.orgMember);
+  const { id } = useAppSelector((state) => state.auth);
 
   const [tickets, setTickets] = useState<
     ITicketAdmin[] | ITicketAssignee[] | ITicketReporter[] | IUserOrgMember[]
@@ -42,6 +57,38 @@ export function TicketsCard() {
   useEffect(() => {
     setTickets([]);
   }, [activeOrgId]);
+
+  useEffect(() => {
+    if (!id) return;
+    // You already set up all your event listeners in socket.ts,
+    // so you can use the socket as needed here.
+
+    // For example, sending another message after component mounts:
+    const socket = connectSocket(id);
+    socket.addEventListener("message", (event) => {
+      const response = JSON.parse(event.data) as
+        | IAssignedTicket
+        | IAdminTicket
+        | IReporterTicket;
+      if (response.type === "assigned") {
+        dispatch(addAssignedTicket(response.ticket));
+        toast(`New ticket assigned to you by ${response.ticket.reporterEmail}`);
+      } else if (response.type === "admin") {
+        dispatch(addAdminTicket(response.ticket));
+        toast(
+          `New ticket created by ${response.ticket.reporterEmail} and assigned to ${response.ticket.assigneeEmail}`
+        );
+      } else if (response.type === "reported") {
+        dispatch(addReportedTicket(response.ticket));
+        toast(
+          `Your ticket assigned to ${response.ticket.assigneeName} is in  ${response.ticket.status} status`
+        );
+      }
+    });
+    return () => {
+      socket.close();
+    };
+  }, [id, dispatch]);
 
   const fetchData = useCallback(async () => {
     if (activeOrgRole === "ADMIN") {

@@ -58,14 +58,19 @@ const reportedTicketSlice = createSlice({
   name: "ReportedTicket",
   initialState,
   reducers: {
-    setReportedTicketData(state, action) {
-      if (state === null) {
-        state = action.payload.data;
-      }
-    },
     removeReportedTicket: (state) => {
       state = null;
       localStorage.removeItem("reportedTicket");
+    },
+    addReportedTicket: (state, action) => {
+      if (state) {
+        state.filter((ticket) => ticket.id !== action.payload.id);
+        state = [...state, action.payload];
+      } else {
+        state = [action.payload];
+      }
+      localStorage.setItem("reportedTicket", JSON.stringify(state));
+      return state;
     },
   },
   extraReducers: (builder) => {
@@ -151,6 +156,6 @@ const reportedTicketSlice = createSlice({
   },
 });
 
-export const { setReportedTicketData, removeReportedTicket } =
+export const { addReportedTicket, removeReportedTicket } =
   reportedTicketSlice.actions;
 export const ReportedTicketSlice = reportedTicketSlice.reducer;

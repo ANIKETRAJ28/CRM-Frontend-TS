@@ -33,6 +33,15 @@ const assignedTicketSlice = createSlice({
       state = null;
       localStorage.removeItem("assignedTicket");
     },
+    addAssignedTicket: (state, action) => {
+      if (state) {
+        state = [...state, action.payload];
+      } else {
+        state = [action.payload];
+      }
+      localStorage.setItem("assignedTicket", JSON.stringify(state));
+      return state;
+    },
   },
   extraReducers: (builder) => {
     builder.addCase(setAssignedTicket.fulfilled, (state, action) => {
@@ -58,5 +67,6 @@ const assignedTicketSlice = createSlice({
   },
 });
 
-export const { removeAssignedTicket } = assignedTicketSlice.actions;
+export const { addAssignedTicket, removeAssignedTicket } =
+  assignedTicketSlice.actions;
 export const AssignedTicketSlice = assignedTicketSlice.reducer;

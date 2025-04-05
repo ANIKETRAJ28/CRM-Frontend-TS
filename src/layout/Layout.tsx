@@ -60,7 +60,7 @@ export function Layout({ children }: { children: React.ReactElement }) {
           </div>
           {user.id ? (
             <div className="flex items-center space-x-3">
-              <div className="bg-gradient-to-r from-blue-500 to-cyan-400 rounded-full p-2 shadow-lg">
+              <div className="bg-gradient-to-r from-blue-500 to-cyan-400 rounded-full p-2 shadow-lg hidden sm:block">
                 <User className="h-5 w-5" />
               </div>
               <div className="overflow-hidden animate-slide-in">
@@ -73,7 +73,7 @@ export function Layout({ children }: { children: React.ReactElement }) {
               </div>
               <Button
                 onClick={handleLogout}
-                className="bg-blue-700 hover:bg-blue-800 transition-colors duration-300 hidden sm:block"
+                className="bg-blue-700 hover:bg-blue-800 transition-colors duration-300"
               >
                 Logout
               </Button>
