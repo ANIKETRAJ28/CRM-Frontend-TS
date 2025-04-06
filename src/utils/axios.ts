@@ -2,7 +2,7 @@ import axios from "axios";
 import { backendUrl } from "@/config/envConfig";
 
 const defaultOptions = {
-  baseURL: backendUrl,
+  baseURL: `${backendUrl}/api/v1/`,
   withCredentials: true,
 };
 
