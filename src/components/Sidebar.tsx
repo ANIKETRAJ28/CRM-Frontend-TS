@@ -46,7 +46,7 @@ export function Sidebar({ setOpen }: { setOpen: (open: boolean) => void }) {
     >
       <button
         onClick={() => setExpanded(!expanded)}
-        className="absolute left-6 top-3 bg-gradient-to-r from-blue-500 to-cyan-400 rounded-full p-1.5 hover:from-blue-700 hover:to-cyan-600 transition-all duration-300 shadow-lg hover:shadow-indigo-500/25 hover-pulse z-10"
+        className="absolute left-6 top-3 bg-blue-500 rounded-full p-1.5 hover:from-blue-700 hover:to-cyan-600 transition-all duration-300 shadow-lg hover:shadow-indigo-500/25 hover-pulse z-10"
       >
         {expanded ? (
           <ChevronLeft className="h-4 w-4" />
@@ -66,7 +66,7 @@ export function Sidebar({ setOpen }: { setOpen: (open: boolean) => void }) {
             </h2>
             <Plus
               onClick={() => setOpen(true)}
-              className="hover:bg-gradient-to-r from-blue-700 to-cyan-600 transition-all duration-300 rounded-sm p-[2px]"
+              className="hover:bg-blue-700 transition-all duration-300 rounded-sm p-[2px]"
             />
           </div>
           <ScrollArea className="flex-1 h-[calc(100vh-200px)]">
@@ -99,7 +99,7 @@ export function Sidebar({ setOpen }: { setOpen: (open: boolean) => void }) {
                               "rounded-full p-2 transition-all duration-300",
                               hoveredOrg === userOrg.org.id ||
                                 activeOrgId === userOrg.org.id
-                                ? "bg-gradient-to-r from-blue-500 to-cyan-400"
+                                ? "bg-blue-500"
                                 : "bg-slate-800"
                             )}
                           >
@@ -115,7 +115,7 @@ export function Sidebar({ setOpen }: { setOpen: (open: boolean) => void }) {
                       {!expanded && (
                         <TooltipContent
                           side="right"
-                          className="animate-fade-in bg-gradient-to-r from-blue-500 to-cyan-400 border-none text-white"
+                          className="animate-fade-in bg-blue-500 border-none text-white"
                         >
                           {userOrg.org.name}
                         </TooltipContent>

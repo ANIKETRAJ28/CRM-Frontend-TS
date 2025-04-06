@@ -53,8 +53,9 @@ export function Home() {
             <Button
               size="lg"
               className="bg-blue-600 hover:bg-blue-700 transition-all duration-300 px-8 py-6 text-lg"
+              onClick={() => navigate("/signup")}
             >
-              Start Free Trial
+              Join Now
             </Button>
           </motion.div>
         </div>

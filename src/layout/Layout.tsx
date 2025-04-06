@@ -54,14 +54,14 @@ export function Layout({ children }: { children: React.ReactElement }) {
         <div className="mx-auto px-4 py-3 flex items-center justify-between">
           <div className="flex items-center gap-2">
             <Building2 className="h-8 w-8 text-blue-500" />
-            <span className="text-2xl font-bold bg-gradient-to-r from-blue-500 to-cyan-400 text-transparent bg-clip-text">
+            <span className="text-2xl font-bold bg-blue-500 text-transparent bg-clip-text">
               NexusCRM
             </span>
           </div>
           {user.id ? (
             <div className="flex items-center space-x-3">
-              <div className="bg-gradient-to-r from-blue-500 to-cyan-400 rounded-full p-2 shadow-lg hidden sm:block">
-                <User className="h-5 w-5" />
+              <div className="bg-blue-500 rounded-full p-2 shadow-lg hidden sm:block">
+                <User className="h-5 w-5 text-white" />
               </div>
               <div className="overflow-hidden animate-slide-in">
                 <p className="font-medium truncate text-white sm:block hidden">
@@ -81,10 +81,10 @@ export function Layout({ children }: { children: React.ReactElement }) {
           ) : (
             <div className="flex items-center space-x-3">
               <Button
-                onClick={() => navigate("/signup")}
+                onClick={() => navigate("/login")}
                 className="bg-blue-700 hover:bg-blue-800 transition-colors duration-300"
               >
-                Join
+                Login
               </Button>
             </div>
           )}

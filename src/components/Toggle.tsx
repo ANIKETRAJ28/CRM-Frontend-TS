@@ -17,7 +17,7 @@ export function Toggle() {
       >
         <ToggleGroupItem
           value="reported"
-          className="flex items-center gap-2 data-[state=on]:bg-gradient-to-r from-blue-500 to-cyan-400 data-[state=on]:text-primary-foreground data-[state=off]:bg-accent"
+          className="flex items-center gap-2 data-[state=on]:bg-blue-500 data-[state=on]:text-primary-foreground data-[state=off]:bg-accent"
           onClick={() => dispatch(toggleActiveState("reported"))}
         >
           <ArrowUpCircle className="h-4 w-4" />
@@ -25,7 +25,7 @@ export function Toggle() {
         </ToggleGroupItem>
         <ToggleGroupItem
           value={`${activeOrgRole === "ADMIN" ? "all" : "assigned"}`}
-          className="flex items-center gap-2 data-[state=on]:bg-gradient-to-r from-blue-500 to-cyan-400 data-[state=on]:text-primary-foreground data-[state=off]:bg-accent"
+          className="flex items-center gap-2 data-[state=on]:bg-blue-500 data-[state=on]:text-primary-foreground data-[state=off]:bg-accent"
           onClick={() =>
             dispatch(
               toggleActiveState(activeOrgRole === "ADMIN" ? "all" : "assigned")
@@ -40,7 +40,7 @@ export function Toggle() {
         {activeOrgRole === "ADMIN" && (
           <ToggleGroupItem
             value="members"
-            className="flex items-center gap-2 data-[state=on]:bg-gradient-to-r from-blue-500 to-cyan-400 data-[state=on]:text-primary-foreground data-[state=off]:bg-accent"
+            className="flex items-center gap-2 data-[state=on]:bg-blue-500 data-[state=on]:text-primary-foreground data-[state=off]:bg-accent"
             onClick={() => dispatch(toggleActiveState("members"))}
           >
             <Users className="h-4 w-4" />
