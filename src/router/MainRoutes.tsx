@@ -4,7 +4,7 @@ import { Home } from "@/pages/Home";
 import { Login } from "@/pages/Login";
 import { Org } from "@/pages/Org";
 import { SignUp } from "@/pages/SignUp";
-import { Table } from "@/pages/Table";
+import { TablePage } from "@/pages/Table";
 import { Routes, Route } from "react-router-dom";
 
 export function MainRoutes() {
@@ -49,7 +49,7 @@ export function MainRoutes() {
         element={
           <Layout>
             <ProtectedLayoutWrapper>
-              <Table />
+              <TablePage />
             </ProtectedLayoutWrapper>
           </Layout>
         }
@@ -59,7 +59,7 @@ export function MainRoutes() {
         element={
           <Layout>
             <ProtectedLayoutWrapper>
-              <Table />
+              <TablePage />
             </ProtectedLayoutWrapper>
           </Layout>
         }

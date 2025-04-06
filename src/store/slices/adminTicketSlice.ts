@@ -21,6 +21,7 @@ const adminTicketSlice = createSlice({
     removeAdminTicket: (state) => {
       state = null;
       localStorage.removeItem("adminTicket");
+      return state;
     },
     addAdminTicket: (state, action) => {
       if (state) {
@@ -37,7 +38,7 @@ const adminTicketSlice = createSlice({
     builder.addCase(setAdminTicket.fulfilled, (state, action) => {
       state = action.payload;
       localStorage.setItem("adminTicket", JSON.stringify(action.payload));
-      return action.payload;
+      return state;
     });
   },
 });

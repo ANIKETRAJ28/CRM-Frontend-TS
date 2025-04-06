@@ -10,7 +10,7 @@ import { Download } from "lucide-react";
 import { useAppSelector } from "@/hooks";
 import { useNavigate, useParams, useSearchParams } from "react-router-dom";
 
-export function Table() {
+export function TablePage() {
   const assignedTicket = useAppSelector((state) => state.assignedTicket);
   const reportedTicket = useAppSelector((state) => state.reportedTicket);
   const adminTicket = useAppSelector((state) => state.adminTicket);

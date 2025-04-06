@@ -1,6 +1,7 @@
 import { IUserOrgMember } from "@/interfaces/user";
-import { Table } from "@/pages/Table";
+// import { TablePage } from "@/pages/TablePage";
 import {
+  Table,
   TableBody,
   TableCell,
   TableHead,
@@ -10,7 +11,7 @@ import {
 import { Badge } from "lucide-react";
 import { IOrgRole } from "@/interfaces/userOrg";
 
-  const getRoleBadgeColor = (role: IOrgRole) => {
+const getRoleBadgeColor = (role: IOrgRole) => {
   switch (role) {
     case "ADMIN":
       return "bg-red-500/10 text-red-500 hover:bg-red-500/20";
@@ -20,8 +21,6 @@ import { IOrgRole } from "@/interfaces/userOrg";
       return "bg-green-500/10 text-green-500 hover:bg-green-500/20";
   }
 };
-
-}
 
 export function MemberTable({ data }: { data: IUserOrgMember[] }) {
   return (
@@ -45,10 +44,7 @@ export function MemberTable({ data }: { data: IUserOrgMember[] }) {
               </TableCell>
               <TableCell className="text-slate-300">{user.email}</TableCell>
               <TableCell>
-                <Badge
-                  variant="outline"
-                  className={`${getRoleBadgeColor(user.role)} border-0`}
-                >
+                <Badge className={`${getRoleBadgeColor(user.role)} border-0`}>
                   {user.role}
                 </Badge>
               </TableCell>

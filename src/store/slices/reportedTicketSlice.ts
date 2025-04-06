@@ -61,6 +61,7 @@ const reportedTicketSlice = createSlice({
     removeReportedTicket: (state) => {
       state = null;
       localStorage.removeItem("reportedTicket");
+      return state;
     },
     addReportedTicket: (state, action) => {
       if (state) {
@@ -77,7 +78,7 @@ const reportedTicketSlice = createSlice({
     builder.addCase(setReportedTicket.fulfilled, (state, action) => {
       state = action.payload;
       localStorage.setItem("reportedTicket", JSON.stringify(action.payload));
-      return action.payload;
+      return state;
     });
     builder.addCase(
       createTicketForUsers.fulfilled,

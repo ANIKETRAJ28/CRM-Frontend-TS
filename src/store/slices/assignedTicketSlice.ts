@@ -32,6 +32,7 @@ const assignedTicketSlice = createSlice({
     removeAssignedTicket: (state) => {
       state = null;
       localStorage.removeItem("assignedTicket");
+      return state;
     },
     addAssignedTicket: (state, action) => {
       if (state) {
@@ -47,7 +48,7 @@ const assignedTicketSlice = createSlice({
     builder.addCase(setAssignedTicket.fulfilled, (state, action) => {
       state = action.payload;
       localStorage.setItem("assignedTicket", JSON.stringify(action.payload));
-      return action.payload;
+      return state;
     });
     builder.addCase(
       updateAssignedTicket.fulfilled,

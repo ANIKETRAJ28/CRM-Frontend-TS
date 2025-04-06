@@ -89,6 +89,8 @@ export function TicketsTable({
   type,
   data,
   role,
+  // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+  // @ts-ignore-next-line
   ticketType,
 }: // onStatusChange,
 | AdminTicketPayload

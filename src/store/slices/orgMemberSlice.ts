@@ -21,13 +21,14 @@ const orgMemberSlice = createSlice({
     removeOrgMember: (state) => {
       state = null;
       localStorage.removeItem("orgMember");
+      return state;
     },
   },
   extraReducers: (builder) => {
     builder.addCase(setOrgMember.fulfilled, (state, action) => {
       state = action.payload;
       localStorage.setItem("orgMember", JSON.stringify(action.payload));
-      return action.payload;
+      return state;
     });
   },
 });

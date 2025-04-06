@@ -14,8 +14,6 @@ import { LockIcon, UserIcon } from "lucide-react";
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useAppDispatch, useAppSelector } from "@/hooks/index";
-import { IUserAuth } from "@/interfaces/user";
-import { getUserInfo } from "@/apis/userInfo";
 import { setUser } from "@/store/slices/authSlice";
 import { toast } from "sonner";
 
@@ -54,15 +52,10 @@ export function Login() {
   }
 
   useEffect(() => {
-    async function getUserData() {
-      const data: IUserAuth = await getUserInfo();
-      dispatch(setUser(data));
-    }
     if (id) {
       navigate("/org");
-    } else {
-      getUserData();
     }
+    dispatch(setUser());
   }, [id, navigate, dispatch]);
 
   return (
