@@ -1,6 +1,7 @@
 import { backendUrl } from "@/config/envConfig";
 
 export function connectSocket(id: string) {
-  const socket = new WebSocket(`wss://${backendUrl}?userId=${id}`);
+  const url = backendUrl.split("://")[0] === "http" ? "ws" : "wss";
+  const socket = new WebSocket(`wss://${url}?userId=${id}`);
   return socket;
 }
