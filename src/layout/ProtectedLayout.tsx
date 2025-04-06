@@ -88,6 +88,8 @@ function ProtectedLayout({ children }: { children: React.ReactElement }) {
       ) {
         return;
       }
+      setTitle("");
+      setDescription("");
       setCreateTicket(false);
     };
 
@@ -323,11 +325,11 @@ function ProtectedLayout({ children }: { children: React.ReactElement }) {
                             title,
                           })
                         );
-                        setDescription("");
-                        setTitle("");
-                        setPriority("LOW");
-                        setCreateTicket(false);
                       }
+                      setDescription("");
+                      setTitle("");
+                      setPriority("LOW");
+                      setCreateTicket(false);
                     }}
                     className="w-full bg-blue-600 hover:bg-blue-700 text-white"
                   >
