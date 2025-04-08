@@ -18,7 +18,7 @@ import {
   addAdminTicket,
   setAdminTicket,
 } from "@/store/slices/adminTicketSlice";
-import { setOrgMember } from "@/store/slices/orgMemberSlice";
+import { addOrgMember, setOrgMember } from "@/store/slices/orgMemberSlice";
 import { IUserOrgMember } from "@/interfaces/user";
 import { TicketsTable } from "./TicketsTable";
 import { SyncLoader } from "react-spinners";
@@ -30,6 +30,7 @@ import { addAssignedTicket } from "@/store/slices/assignedTicketSlice";
 import {
   IAdminTicket,
   IAssignedTicket,
+  IMemberTicket,
   IReporterTicket,
 } from "@/interfaces/socket";
 import { toast } from "sonner";
@@ -69,7 +70,8 @@ export function TicketsCard() {
       const response = JSON.parse(event.data) as
         | IAssignedTicket
         | IAdminTicket
-        | IReporterTicket;
+        | IReporterTicket
+        | IMemberTicket;
       if (response.type === "assigned") {
         dispatch(addAssignedTicket(response.ticket));
         toast(`New ticket assigned to you by ${response.ticket.reporterEmail}`);
@@ -83,6 +85,9 @@ export function TicketsCard() {
         toast(
           `Your ticket assigned to ${response.ticket.assigneeName} is in  ${response.ticket.status} status`
         );
+      } else if (response.type === "member") {
+        dispatch(addOrgMember(response.ticket));
+        toast(`New member ${response.ticket.name} added to your organization`);
       }
     });
     return () => {

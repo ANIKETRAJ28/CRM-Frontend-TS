@@ -18,6 +18,15 @@ const orgMemberSlice = createSlice({
   name: "OrgMember",
   initialState,
   reducers: {
+    addOrgMember: (state, action) => {
+      if (state) {
+        state.push(action.payload);
+      } else {
+        state = [action.payload];
+      }
+      localStorage.setItem("orgMember", JSON.stringify(state));
+      return state;
+    },
     removeOrgMember: (state) => {
       state = null;
       localStorage.removeItem("orgMember");
@@ -33,5 +42,5 @@ const orgMemberSlice = createSlice({
   },
 });
 
-export const { removeOrgMember } = orgMemberSlice.actions;
+export const { addOrgMember, removeOrgMember } = orgMemberSlice.actions;
 export const OrgMemberSlice = orgMemberSlice.reducer;
